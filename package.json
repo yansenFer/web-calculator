@@ -1,5 +1,6 @@
 {
   "name": "web-calculator",
+  "homepage" : "https://yansenfer.github.io/web-calculator/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
