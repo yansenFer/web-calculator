@@ -68,10 +68,17 @@ function App() {
       if (operator !== tampungOperator && tampungOperator !== "") {
         handleTampungOperator(numberValue)
       } else {
-        setTotal(total / numberValue)
-        setTampungOperator(operator)
-        setTampungValue([])
-        setOperator("")
+        if (total === 0) {
+          setTotal(numberValue)
+          setTampungOperator(operator)
+          setTampungValue([])
+          setOperator("")
+        } else {
+          setTotal(total / numberValue)
+          setTampungOperator(operator)
+          setTampungValue([])
+          setOperator("")
+        }
       }
     }
   }
@@ -99,10 +106,17 @@ function App() {
       setOperator("")
     }
     if (tampungOperator === "/") {
-      setTotal(total / numberValue)
-      setTampungOperator(operator)
-      setTampungValue([])
-      setOperator("")
+      if (total === 0) {
+        setTotal(numberValue)
+        setTampungOperator(operator)
+        setTampungValue([])
+        setOperator("")
+      } else {
+        setTotal(total / numberValue)
+        setTampungOperator(operator)
+        setTampungValue([])
+        setOperator("")
+      }
     }
   }
 
@@ -147,6 +161,12 @@ function App() {
     }
   }
 
+  const handleSelectOperator = (op) => {
+    if (tampungValue.length !== 0) {
+      setOperator(op)
+    }
+  }
+
   return (
     // belum bisa melakukan penjumalahn setelah = dan belum bisa menghitung angka koma
     <div className="flex flex-wrap  w-full h-screen rounded-lg justify-center items-center ">
@@ -168,7 +188,7 @@ function App() {
         </div>
         <div className="grid w-full grid-cols-4 gap-5">
           <button
-            onClick={() => tampungValue.length !== 0 && setOperator("/")}
+            onClick={() => handleSelectOperator("/")}
             className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg"
           >
             /
@@ -210,7 +230,7 @@ function App() {
             9
           </button>
           <button
-            onClick={() => tampungValue.length !== 0 && setOperator("*")}
+            onClick={() => handleSelectOperator("*")}
             className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg"
           >
             x
@@ -234,7 +254,7 @@ function App() {
             6
           </button>
           <button
-            onClick={() => tampungValue.length !== 0 && setOperator("-")}
+            onClick={() => handleSelectOperator("-")}
             className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg"
           >
             -
@@ -258,7 +278,7 @@ function App() {
             3
           </button>
           <button
-            onClick={() => tampungValue.length !== 0 && setOperator("+")}
+            onClick={() => handleSelectOperator("+")}
             className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg"
           >
             +
@@ -275,9 +295,12 @@ function App() {
           >
             0
           </button>
-          <div className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg">
+          <button
+            onClick={() => handleSetValue(".")}
+            className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg"
+          >
             .
-          </div>
+          </button>
           <button
             onClick={() => handleEquals()}
             className="bg-gray-700 border-2 min-w-fit p-3 border-yellow-600 hover:shadow-lg hover:shadow-gray-950 duration-200 hover:border-yellow-400 w-full h-14 flex justify-center items-center rounded-lg"
